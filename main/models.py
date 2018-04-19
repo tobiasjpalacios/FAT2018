@@ -5,6 +5,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     personalID = models.IntegerField()
+    email = models.EmailField(max_lenght=32)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
