@@ -95,6 +95,7 @@ class Enrrolment(RelationParticipe):
 
 class Appointment(RelationParticipe):
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
-
+    timeAttendance = models.TimeField()
+    
     def __str__(self):
         return "{} - {}".format(self.day, self.retired)
