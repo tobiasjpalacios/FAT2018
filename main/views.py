@@ -15,3 +15,6 @@ def days(request):
 
 def createuser(request):
     return render(request, 'create_user.html')
+
+def mLogIn(request):
+    return render(request, 'login.html')
