@@ -4,4 +4,4 @@ from .models import Retired
 class RetiredForm(ModelForm):
     class Meta:
         model = Retired
-        fields = ['first_name', 'last_name', 'personalID']
+        fields = ['first_name', 'last_name', 'personalID', 'email']
