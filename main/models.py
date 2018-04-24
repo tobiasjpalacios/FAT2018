@@ -25,7 +25,8 @@ class Retired(Person):
         return False
     
     def getClassrooms(self):
-        return False
+        result = Classroom.objects.filter(retired=self)
+        return result
 
     def getAppointments(self):
         result = Appointment.objects.filter(retired=self)
