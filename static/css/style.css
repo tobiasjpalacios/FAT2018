@@ -1,0 +1,21 @@
+body {
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.container{
+    width: 400px;
+    margin-top: 100px;
+    margin-left: 150px;
+}
+
+.label {
+    text-align: center;
+    color: white;
+}
+
+.form-control {
+    width: 400px;
+}
