@@ -28,7 +28,8 @@ class Retired(Person):
         return False
 
     def getAppointments(self):
-        return False
+        result = Appointment.objects.filter(retired=self)
+        return result
         
 class Doctor(Person):
     speciality = models.CharField(max_length=32)
