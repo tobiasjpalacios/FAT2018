@@ -5,7 +5,6 @@ class Person(models.Model):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     personalID = models.IntegerField()
-    email = models.EmailField()
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -40,8 +39,8 @@ class Teacher(Person):
     subject = models.CharField(max_length=32)
     
     def getClassrooms(self):
-        results = Classroom.objects.filter(teacher=self)
-        return results
+        my_Classrooms = Classroom.objects.filter(teacher=self)
+        return my_Classrooms
 
 
 class RelationRetired(models.Model):
