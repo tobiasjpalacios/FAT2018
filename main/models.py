@@ -20,6 +20,8 @@ class Retired(Person):
         return False
     
     def isPartner(self):
+        if Partner.objects.get(retired=self):
+            return True
         return False
     
     def getClassrooms(self):
@@ -45,7 +47,7 @@ class Teacher(Person):
 
 class RelationRetired(models.Model):
     number = models.IntegerField()
-    retired = models.ForeignKey(Retired, on_delete=models.CASCADE)
+    retired = models.OneToOneField(Retired, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{} - {}".format(self.number, self.retired)
