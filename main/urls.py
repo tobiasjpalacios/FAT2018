@@ -7,4 +7,5 @@ urlpatterns = [
     path('teachers/', teachers, name='teachers'),
     path('days/', days, name='days'),
     path('createuser/', createuser, name='createuser'),
+    path('mlogin/', mLogIn, name='mLogIn'),
 ]
