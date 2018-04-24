@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def main(request):
@@ -40,4 +41,12 @@ def createuser(request):
     return render(request, 'create_user.html', results)
 
 def mLogIn(request):
-    return render(request, 'login.html')
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+    if not request.user.is_authenticated:
+        return render(request, 'login.html')
+    return redirect(main)
