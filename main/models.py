@@ -16,6 +16,8 @@ class Person(models.Model):
 
 class Retired(Person):
     def isAffiliate(self):
+        if Affiliate.objects.get(retired=self):
+            return True
         return False
     
     def isPartner(self):
