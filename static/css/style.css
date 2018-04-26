@@ -4,7 +4,15 @@ body {
     background-attachment: fixed;
     background-size: 100% 100%;
 }
+.colored {
+    height:100px;
+    background-color:cadetblue;
+}
 
+.text{
+    color:white; 
+    margin-left: 100px
+}
 .container{
     width: 400px;
     margin-top: 100px;
@@ -18,4 +26,17 @@ body {
 
 .form-control {
     width: 400px;
+}
+
+.parallax {
+    /* The image used */
+
+    /* Set a specific height */
+    min-height: 500px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
