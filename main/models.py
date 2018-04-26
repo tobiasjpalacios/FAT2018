@@ -73,7 +73,10 @@ class Day(models.Model):
 
     def getAppointments(self):
         results = Appointment.objects.filter(dat=self).retired
-        return results
+        return results  
+    
+    def __str__(self):
+        return "{} - {}".format(self.doctor, self.day)
 
 class Classroom(models.Model):
     day = models.DateField(auto_now=False)
