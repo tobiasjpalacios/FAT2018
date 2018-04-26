@@ -1,0 +1,33 @@
+{% extends 'mainBase.html' %}
+{% load static %}
+
+{% block imports %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock imports %}
+
+{% block title %}
+Centro de jubilados
+{% endblock title %}
+
+{% block body %}
+<div style="height:100px;background-color:cadetblue;">
+<br>
+<h1 style="color:white; margin-left: 100px">Centro de jubilados</h1>
+</div>
+
+<div class="parallax" id="parallax1"></div>
+
+<div style="height:200px;background-color:white;">
+<h1 style="color:cadetblue; margin-left:50px">¿Quíenes somos?</h1>
+<br>
+<h4 style="margin-left:70px">Párrafo</h4>
+</div>
+
+<div class="parallax" id="parallax2"></div>
+
+<script>
+$("#parallax1").css('background-image', 'url("{% static "img/anciano.jpg" %}")')
+$("#parallax2").css('background-image', 'url("{% static "img/residenciamayores.jpg" %}")')
+
+</script>
+{% endblock body %}   
