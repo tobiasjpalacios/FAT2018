@@ -81,10 +81,15 @@ class Classroom(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     capacity = models.IntegerField()
     duration = models.IntegerField()
+    name = models.CharField(max_length=32)
+    description = models.CharField(max_length=256)
 
     def getStudents(self):
         result = Enrrolment.objects.filter(classroom=self).retired
         return result
+    
+    def __str__(self):
+        return "{} - {}".format(self.name, self.day)
 
 class Affiliate(RelationRetired):
     pass    
