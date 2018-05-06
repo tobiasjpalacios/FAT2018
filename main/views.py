@@ -13,8 +13,13 @@ def classrooms(request):
     results={}
     now = datetime.datetime.now()
     results['clases']=Classroom.objects.filter(day__gte=now.date())
+    return render(request, 'classroom.html', results)
 
-    return render(request, 'classrooms.html', results)
+def appointments(request):
+    results = {}
+    now = datetime.datetime.now()
+    results['turnos'] = Day.objects.filter(day__gte=now.date())
+    return render(request, 'appointment.html', results)
 
 def teachers(request):
     return render(request, 'teachers.html')
@@ -39,12 +44,10 @@ def createuser(request):
                     #user.last_name = instance.last_name
                     #user.save()
                     return redirect(main)
-                else:
-                    results["error_user"]= True
-            else:
-                results['error_password']=True
-    results['form']=RetiredForm()
-    return render(request, 'create_user.html', results)
+    if not request.user.is_authenticated:
+        results['form'] = RetiredForm()
+        return render(request, 'create_user.html', results)
+    return redirect(main)
 
 def mLogIn(request):
     if request.method == "POST":
@@ -56,3 +59,6 @@ def mLogIn(request):
     if not request.user.is_authenticated:
         return render(request, 'login.html')
     return redirect(main)
+
+def profile(request):
+    return render(request, 'profile.html')

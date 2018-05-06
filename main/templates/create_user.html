@@ -1,0 +1,46 @@
+{% extends 'mainBase.html' %}
+{% load static %}
+{% block imports %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock imports %}
+{% block title %}
+{% endblock title %}  
+{% block body %}
+    <div class="container">
+        <form action="{% url 'createuser' %}" method="POST">
+            {% csrf_token %}
+            <h1 class="label">Crear usuario</h1>
+            <label class="label">Nombre</label>
+            <div class="form-group">
+                <input class="form-control" placeholder="Ingrese nombre" name="{{ form.first_name.html_name }}">
+            </div>
+            <label class="label">Apellido</label>
+            <div class="form-group">
+                <input class="form-control" placeholder="Ingrese apellido" name="{{ form.last_name.html_name }}">
+            </div>
+            <label class="label">Documento</label>
+            <div class="form-group">
+                <input class="form-control" placeholder="Ingrese documento" name="{{ form.personalID.html_name }}">
+            </div>
+            <label class="label">Correo electronico</label>
+            <div class="form-group">
+                <input class="form-control" type="email" placeholder="Ingrese correo electronico" name="{{ form.email.html_name }}" >
+            </div>
+            <label class="label">Contraseña</label>
+            <div class="form-group">
+                <input class="form-control" type="password" id="password" placeholder="Ingrese su contraseña" name="password">
+            </div>
+            <label class="label">repita la contraseña</label>
+            <div class="form-group">
+                <input class="form-control" type="password" placeholder="Ingrese nuevamente la contraseña" name="repassword">
+            </div>
+            <div align="center">
+                <button type="submit" class="btn btn-outline-primary">Crear</button>    
+            </div>
+        </form>
+    </div>
+
+<script>
+$('body').css('background-image', 'url("{% static "img/Butterfly.jpg" %}")')
+</script>
+{% endblock body %}  

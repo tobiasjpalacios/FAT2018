@@ -6,8 +6,8 @@
 {% block body %}
 <nav class="navbar navbar-dark bg-primary">
   <!-- Navbar content -->
-        <a class="navbar-brand" href="#">Centro de Jubilados</a>
-        <a class="navbar-brand" href="#" > Nombre de Usuario</a>
+        <a class="navbar-brand" href="{% url 'main' %}">Centro de Jubilados</a>
+        <a class="navbar-brand">{{ user }}</a>
       </nav>
       <div class="container">
           <div class="row">
@@ -18,7 +18,7 @@
                     <div class="card-body">
                       <h5 class="card-title">Proximos Turnos</h5>
                       <p class="card-text">Aca podra acceder a ver sus proximos turnos ya programados.</p>
-                      <a href="#" class="btn btn-primary">VER TURNOS</a>
+                      <a href="{% url 'appointments' %}" class="btn btn-primary">VER TURNOS</a>
                     </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <div class="card-body">
                       <h5 class="card-title">Mis Clases</h5>
                       <p class="card-text">Aca podra ver las clases a las cuales usted esta anotado</p>
-                      <a href="#" class="btn btn-primary">VER CLASES</a>
+                      <a href="{% url 'classrooms' %}" class="btn btn-primary">VER CLASES</a>
                     </div>
             </div>
         </div>
