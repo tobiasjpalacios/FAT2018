@@ -2,13 +2,19 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from .models import *
+import datetime
 
 # Create your views here.
 def main(request):
     return render(request, 'main.html')
     
 def classrooms(request):
-    return render(request, 'classrooms.html')
+    results={}
+    now = datetime.datetime.now()
+    results['clases']=Classroom.objects.filter(day__gte=now.date())
+
+    return render(request, 'classrooms.html', results)
 
 def teachers(request):
     return render(request, 'teachers.html')
