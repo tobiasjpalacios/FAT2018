@@ -1,0 +1,81 @@
+{% extends 'mainBase.html' %}
+{% load static %}
+{% block imports %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock imports %}
+{% block title %}
+{% endblock title %}  
+{% block body %}
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <a class="navbar-brand" href="{% url 'main' %}">Menu</a>
+        <div class="navright">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 round" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 round" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Lunes 7</th>
+        <th scope="col">Martes 8</th>
+        <th scope="col">Miercoles 9</th>
+        <th scope="col">Jueves 10</th>
+        <th scope="col">Viernes 11</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="table-active">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Doctor</h5>
+            <h5>area:</h5><p>oftalmologia</p>
+            <h5>hora:</h5><p>14:30</p>
+            <a href="#" class="btn btn-primary">Solicitar turno</a>
+          </div>
+        </div>
+      </td>
+      <td class="table-active">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </td>
+      <td class="table-active">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </td>
+      <td class="table-active">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </td>
+      <td class="table-active">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+{% endblock body %}  
