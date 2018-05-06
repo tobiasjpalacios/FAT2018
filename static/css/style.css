@@ -19,3 +19,28 @@ body {
 .form-control {
     width: 400px;
 }
+
+.navbar {
+    overflow: hidden;
+    position: fixed;
+    top: 10px; 
+    width: 80%;
+    border-radius: 30px;
+}
+
+.navbar .navright {
+    position: absolute;
+    right: 10px;
+}
+
+.round {
+    border-radius: 20px;
+}
+.table {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.table-active .card-text {
+    width: 200px;
+}
