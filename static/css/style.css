@@ -1,68 +1,96 @@
-body {
-    background-repeat: no-repeat;
-    background-position: left top;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-}
-.colored {
-    height:100px;
-    background-color:cadetblue;
-}
-
-.colored .text {
-    vertical-align: middle;
-    line-height: 90px;
-}
-
-.text{
-    color:white; 
-    margin-left: 100px
-}
-
-.container{
-    width: 400px;
-    margin-top: 100px;
-    margin-left: 150px;
-}
-
-.label {
+/* button */
+button {    
+    display: inline-block;
+    border-radius: 4px;
+    border: none;
     text-align: center;
-    color: white;
+    padding: 10px 50px;
+    cursor: pointer;
+    margin: 5px;   
 }
 
-.form-control {
-    width: 400px;
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
 }
-.navbar {
-    overflow: hidden;
-    position: fixed;
-    top: 10px; 
-    width: 80%;
-    left: 10%;
-    border-radius: 30px;
-}
-
-.navbar .navright {
+  
+button span:after {
+    content: '\00bb';
     position: absolute;
-    right: 10px;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+button:hover span {
+    padding-right: 25px;
+}
+  
+button:hover span:after {
+    opacity: 1;
+    right: 0;
 }
 
-.round {
-    border-radius: 20px;
-}
-.table {
-    margin: 0 auto;
-    width: 70%;
+/* shadow */
+.shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 18px 0 rgba(0, 0, 0, 0.19);    
 }
 
-.table-active .card-text {
-    width: 200px;
+.shadow:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 36px 0 rgba(0, 0, 0, 0.19);
 }
 
-.parallax {
-    min-height: 500px; 
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+/* font */
+.font {
+    font-family: Sans-serif;
+    font-size: 18px;
+}
+
+/* colors */
+.violet {
+    background-color: #614965;
+    color: rgb(255, 255, 255);
+}
+
+.violet:hover{
+    background-color: #8e7793;
+}
+
+.blue {
+    background-color: #306bac;
+    color: rgb(255, 255, 255);
+}
+
+.blue:hover{
+    background-color: #5585bb;
+}
+
+.green {
+    background-color: #3f6b4f;
+    color: rgb(255, 255, 255);
+}
+
+.green:hover{
+    background-color: #61856f;
+}
+
+.yellow {
+    background-color: #f39237;
+    color: rgb(255, 255, 255);
+}
+
+.yellow:hover{
+    background-color: #f5a55b;
+}
+
+.red {
+    background-color: #ea3b35;
+    color: rgb(255, 255, 255);
+}
+
+.red:hover{
+    background-color: #e47c7b;
 }
