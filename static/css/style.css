@@ -142,36 +142,31 @@ button:hover span:after {
 
 ul {
     list-style-type: none;
-    margin: 15px;
-    padding: 0;
     overflow: hidden;
-    background-color: blue;
-    border-radius: 10px;
-    font-weight: bold;
+    margin: 20px;
+    padding: 0;
+    border-radius: 4px;
 }
+
 
 li {
     float: left;
 }
 
+.right {
+    float: right;
+}
+
 li a {
     display: block;
-    color: #000000;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 
 li a:hover {
-    background-color: #0202a4;
-    font-weight: bold;
-    color:#ffffff;
-}
-li .float:right{
-    float:right;
-}
-.background-black {
-    background-color: #000000;
+    background-color: #575757;
+    border-radius: 4px;
 }
 
 /* TABLE */
