@@ -1,4 +1,4 @@
-/* button */
+/* BUTTON */
 button {    
     display: inline-block;
     border-radius: 4px;
@@ -34,7 +34,7 @@ button:hover span:after {
     right: 0;
 }
 
-/* shadow */
+/* SHADOW */
 .shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 18px 0 rgba(0, 0, 0, 0.19);    
 }
@@ -43,7 +43,7 @@ button:hover span:after {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 36px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* font */
+/* FONT */
 .sans {
     font-family: Sans-serif;
     font-size: 15px;
@@ -59,7 +59,7 @@ button:hover span:after {
     font-size: 15px;
 }
 
-/* colors */
+/* COLORS */
 .violet {
     background-color: #614965;
     color: rgb(255, 255, 255);
@@ -105,7 +105,7 @@ button:hover span:after {
     background-color: #e47c7b;
 }
 
-/* card */
+/* CARD */
 .card {
     height: 400px;
     width: 350px;
@@ -130,3 +130,74 @@ button:hover span:after {
     padding: 4px 16px;
     margin-left: 20px;      
 } 
+
+/* NAVBAR */
+
+ul {
+    list-style-type: none;
+    margin: 15px;
+    padding: 0;
+    overflow: hidden;
+    background-color: blue;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #0202a4;
+    font-weight: bold;
+    color:#ffffff;
+}
+li .float:right{
+    float:right;
+}
+.background-black {
+    background-color: #000000;
+}
+
+/* TABLE */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #a7a7a7;
+}
+
+/* FIELD */
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 7px;
+    border: 3px solid #a7a7a7;
+}
+
+/* DIV */
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
