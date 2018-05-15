@@ -1,6 +1,15 @@
 from django.db import models
 from django.conf import settings
 
+
+DAYS_CHOICES = (
+    (0, 'Lunes'),
+    (1, 'Martes'),
+    (2, 'Miercoles'),
+    (3, 'Jueves'),
+    (4, 'Viernes')
+)
+
 class Person(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
@@ -75,11 +84,8 @@ class Day(models.Model):
         return "{} - {}".format(self.doctor, self.day)
 
 class Classroom(models.Model):
-    day = models.DateField(auto_now=False)
-    hour = models.DateTimeField(auto_now=False)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     capacity = models.IntegerField()
-    duration = models.IntegerField()
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
 
@@ -89,6 +95,12 @@ class Classroom(models.Model):
     
     def __str__(self):
         return "{} - {}".format(self.name, self.day)
+
+class DayInfo(models.Model):
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    day = models.IntegerField(choices=DAYS_CHOICES, default=False)
+    start_hour = models.IntegerField()
+    finish_hour = models.IntegerField()
 
 class Affiliate(RelationRetired):
     pass    
