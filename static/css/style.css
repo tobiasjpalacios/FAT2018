@@ -1,3 +1,10 @@
+
+/* BODY */
+
+body {
+    background-color: #bfbfbf;
+}
+
 /* BUTTON */
 button {    
     display: inline-block;
@@ -36,11 +43,11 @@ button:hover span:after {
 
 /* SHADOW */
 .shadow {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 18px 0 rgba(0, 0, 0, 0.19);    
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 18px 0 #00000030;    
 }
 
 .shadow:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 36px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 16px 0 #00000033, 0 12px 36px 0 #00000030;
 }
 
 /* FONT */
@@ -62,7 +69,7 @@ button:hover span:after {
 /* COLORS */
 .violet {
     background-color: #614965;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
 }
 
 .violet:hover{
@@ -71,7 +78,7 @@ button:hover span:after {
 
 .blue {
     background-color: #306bac;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
 }
 
 .blue:hover{
@@ -80,7 +87,7 @@ button:hover span:after {
 
 .green {
     background-color: #3f6b4f;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
 }
 
 .green:hover{
@@ -89,7 +96,7 @@ button:hover span:after {
 
 .yellow {
     background-color: #f39237;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
 }
 
 .yellow:hover{
@@ -98,7 +105,7 @@ button:hover span:after {
 
 .red {
     background-color: #ea3b35;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
 }
 
 .red:hover{
@@ -197,7 +204,7 @@ input {
 /* DIV */
 
 div {
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: #f2f2f2;
     padding: 20px;
 }
