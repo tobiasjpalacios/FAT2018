@@ -69,12 +69,9 @@ class RelationParticipe(models.Model):
     class Meta:
         abstract = True
 
-class Day(models.Model):
+class WorkDay(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    day = models.DateField(auto_now=False)
-    start_hour = models.DateTimeField(auto_now=False)
-    finish_hour = models.DateTimeField(auto_now=False)
-    interval = models.IntegerField()
+    day = models.IntegerField(choices=DAYS_CHOICES, default=False)
 
     def getAppointments(self):
         results = Appointment.objects.filter(dat=self).retired
@@ -96,11 +93,11 @@ class Classroom(models.Model):
     def __str__(self):
         return "{} - {}".format(self.name, self.day)
 
-class DayInfo(models.Model):
+class ClassroomDay(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     day = models.IntegerField(choices=DAYS_CHOICES, default=False)
     start_hour = models.IntegerField()
-    finish_hour = models.IntegerField()
+    
 
 class Affiliate(RelationRetired):
     pass    
@@ -115,8 +112,9 @@ class Enrrolment(RelationParticipe):
         return "{} - {}".format(self.classroom, self.retired)
 
 class Appointment(RelationParticipe):
-    day = models.ForeignKey(Day, on_delete=models.CASCADE)
+    day = models.ForeignKey(WorkDay, on_delete=models.CASCADE)
     timeAttendance = models.TimeField()
+    start_hour = models.IntegerField()
     
     def __str__(self):
         return "{} - {}".format(self.day, self.retired)
