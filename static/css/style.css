@@ -2,10 +2,11 @@
 /* BODY */
 
 body {
-    background-color: #bfbfbf;
+    background-color: #e9e9e9;
 }
 
 /* BUTTON */
+
 button {    
     display: inline-block;
     border-radius: 4px;
@@ -42,8 +43,9 @@ button:hover span:after {
 }
 
 /* SHADOW */
+
 .shadow {
-    box-shadow: 0 4px 8px 0 #00000033, 0 6px 18px 0 #00000030;    
+    box-shadow: 0 4px 8px 0 #00000033, 0 6px 18px 0 #00000030;
 }
 
 .shadow:hover {
@@ -51,6 +53,7 @@ button:hover span:after {
 }
 
 /* FONT */
+
 .sans {
     font-family: Sans-serif;
     font-size: 15px;
@@ -67,12 +70,13 @@ button:hover span:after {
 }
 
 /* COLORS */
+
 .violet {
     background-color: #614965;
     color: #ffffff;
 }
 
-.violet:hover{
+.violet-hover:hover{
     background-color: #8e7793;
 }
 
@@ -81,7 +85,7 @@ button:hover span:after {
     color: #ffffff;
 }
 
-.blue:hover{
+.blue-hover:hover{
     background-color: #5585bb;
 }
 
@@ -90,7 +94,7 @@ button:hover span:after {
     color: #ffffff;
 }
 
-.green:hover{
+.green-hover:hover{
     background-color: #61856f;
 }
 
@@ -99,7 +103,7 @@ button:hover span:after {
     color: #ffffff;
 }
 
-.yellow:hover{
+.yellow-hover:hover{
     background-color: #f5a55b;
 }
 
@@ -108,14 +112,16 @@ button:hover span:after {
     color: #ffffff;
 }
 
-.red:hover{
+.red-hover:hover{
     background-color: #e47c7b;
 }
 
 /* CARD */
+
 .card {
     height: 400px;
     width: 350px;
+    background-color: #FFFFFF;
 }
 
 .card img {
@@ -126,7 +132,7 @@ button:hover span:after {
 .card h1 {
     margin-top: -4px;
     padding: 10px 10px;     
-    background-color: #f0f0f0;
+    background-color: #d6d6d6;
 }   
 
 .card p {
@@ -143,18 +149,23 @@ button:hover span:after {
 ul {
     list-style-type: none;
     overflow: hidden;
-    margin: 20px;
     padding: 0;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
+ul .no-borders {
+    border: none;
+}
 
 li {
     float: left;
+    border-right: solid 2px #264f88;
 }
 
 .right {
     float: right;
+    border-left: solid 2px #264f88;
+    border-right: 0px;
 }
 
 li a {
@@ -164,9 +175,15 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
-    background-color: #575757;
-    border-radius: 4px;
+a img {
+    width:22px;
+    max-height: 46px;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+.nav-img {
+    padding: 10px;
 }
 
 /* TABLE */
@@ -196,10 +213,21 @@ input {
     border: 3px solid #a7a7a7;
 }
 
-/* DIV */
+/* SEARCH BAR */
 
-div {
-    border-radius: 0px;
-    background-color: #f2f2f2;
-    padding: 20px;
+input[type=text] {
+    margin-left: 10px;
+    width: 80px;    
+    height: 30px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 0px 5px;
+    font-size: 16px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
 }
