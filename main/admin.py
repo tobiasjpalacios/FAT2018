@@ -5,7 +5,7 @@ from .models import *
 admin.site.register(Retired)
 admin.site.register(Doctor)
 admin.site.register(Teacher)
-admin.site.register(Day)
+admin.site.register(WorkDay)
 admin.site.register(Classroom)
 admin.site.register(Affiliate)
 admin.site.register(Partner)
