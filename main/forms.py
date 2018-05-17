@@ -7,7 +7,7 @@ class ClassroomForm(ModelForm):
         model = Classroom
         fields = ['capacity','name','description']
 
-class DayForm(ModelForm):
+class WorkDayForm(ModelForm):
     class Meta:
-        model = Day
-        fields = ['day','start_hour','finish_hour','interval']
+        model = WorkDay
+        fields = ['day' ]
