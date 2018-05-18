@@ -1,25 +1,32 @@
 {% extends 'mainBase.html' %}
 {% load static %}
-
 {% block imports %}
 {% endblock imports %}
-
 {% block title %}
 Centro de jubilados
 {% endblock title %}
-
 {% block body %}
-<ul class="red">
-    <li><a>Abe</a></li>
-    <li><a>prueba</a></li>
-    <li class="right"><a>pete</a></li>  
+<ul class="blue">
+    <li class="sans">
+        <a class="blue-hover nav-img"><img src="{% static "img/home.png" %}"></a>
+    </li>
+    <li class="no-borders">
+    <input type="text" placeholder="Buscar">
+    </li>
+    <li class="sans right">
+        <a class="blue-hover">Perfil</a>
+    </li>
+    <li class="sans right">
+        <a class="blue-hover">Cerrar sesión</a>
+    </li>
 </ul>
-        
-<button>hola</button>
-<div class="card">
 
+<!--
+<div class="card shadow">
+    <img src="{% static "img/medico-atendiendo-profile.jpg" %}">
+    <h1 class="sans">Próximos turnos</h1>
+    <p class="sans">Acceda a su agenda de consultas médicas</p>
+    <button class="blue"><span>Entrar</span></button>
 </div>
-<div class="card">
-
-</div>
+-->
 {% endblock body %}   
