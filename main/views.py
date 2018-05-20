@@ -30,24 +30,22 @@ def days(request):
 def createuser(request):
     results={}
     if request.method == "POST":
-        form= RetiredForm(request.POST)
-        if form.is_valid():
-            instance = form.instance
-            password=request.POST['password']
-            repassword=request.POST['repassword']
-            if password == repassword:
-                if not User.objects.filter(username=instance.personalID).exists():
-                    user = User.objects.create_user(instance.personalID, instance.email, password)
-                    instance.user = user
-                    instance.save()
-                    #user.first_name = instance.first_name
-                    #user.last_name = instance.last_name
-                    #user.save()
-                    return redirect(main)
-    if not request.user.is_authenticated:
-        results['form'] = RetiredForm()
-        return render(request, 'create_user.html', results)
-    return redirect(main)
+        username = request.POST["personalid"]
+        first_name = request.POST["firstname"]
+        last_name = request.POST["lastname"]
+        email = request.POST["email"]
+        password = request.POST["password"]
+        repassword = request.POST["repassword"]
+        if password == repassword:
+            user = User.objects.create_user(username, email, password)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+            login(request, user)
+            retired = Retired.objects.create(user=user)
+            retired.save()
+            return redirect(main)
+    return render(request, 'create_user.html')
 
 def mLogIn(request):
     if request.method == "POST":
@@ -59,6 +57,9 @@ def mLogIn(request):
     if not request.user.is_authenticated:
         return render(request, 'login.html')
     return redirect(main)
+
+def mLogOut(request):
+    logout(request)
 
 def profile(request):
     return render(request, 'profile.html')
