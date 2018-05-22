@@ -16,7 +16,7 @@ DAYS_CHOICES = (
 class DayForm(forms.Form):
     start_hour = forms.TimeField(label='Hora de inicio')
     finish_hour = forms.TimeField(label='Hora de finalizacion')
-    day = forms.IntegerField(widget =forms.SelectDateWidget (DAYS_CHOICES))
+    day = forms.ChoiceField(choices=DAYS_CHOICES)
     duration = forms.IntegerField()
     interval = forms.IntegerField()
     time_to_start = forms.IntegerField()    
@@ -28,5 +28,5 @@ class ClassRoomForm(forms.Form):
     capacity = forms.IntegerField()
 
 class ClassDayForm(forms.Form):
-    day = forms.IntegerField(widget=forms.SelectDateWidget(DAYS_CHOICES))
+    day = forms.ChoiceField(choices=DAYS_CHOICES)
     start_hour =forms.IntegerField(label='hora de inicio')
