@@ -1,53 +1,30 @@
 {% extends 'mainBase.html' %}
-<html lang="en">
 {% block title %}
     Perfil
 {% endblock title %}
 {% block body %}
-<nav class="navbar navbar-dark bg-primary">
-  <!-- Navbar content -->
-        <a class="navbar-brand" href="{% url 'main' %}">Centro de Jubilados</a>
-        <a class="navbar-brand">{{ user }}</a>
-      </nav>
+<ul class="blue">
+        <li onclick="location.href='{% url 'main' %}'"><a>Centro de Jubilados</a></li>
+        <li class="right"><a>{{ user }}</a></li>
+</ul>
       <div class="container">
-          <div class="row">
-              <div class="col">
-                  <div class="container">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/static/img/medico-atendiendo-profile.jpg" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">Proximos Turnos</h5>
+                <div class="card">
+                    <img src="/static/img/medico-atendiendo-profile.jpg">
+                      <h1 class="card-title">Proximos Turnos</h1>
                       <p class="card-text">Aca podra acceder a ver sus proximos turnos ya programados.</p>
-                      <a href="{% url 'appointments' %}" class="btn btn-primary">VER TURNOS</a>
+                      <a><button onclick="location.href='{% url 'appointments' %}'"class="blue" >VER TURNOS</a>
                     </div>
-                    </div>
-                </div>
-              </div>
-              <div class="col">
-                  <div class="container">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/static/img/profesor-dando-clases-profile.jpg" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">Mis Clases</h5>
+                <div class="card">
+                    <img src="/static/img/profesor-dando-clases-profile.jpg">
+                      <h1 class="card-title">Mis Clases</h1>
                       <p class="card-text">Aca podra ver las clases a las cuales usted esta anotado</p>
-                      <a href="{% url 'classrooms' %}" class="btn btn-primary">VER CLASES</a>
-                    </div>
-            </div>
-        </div>
-            </div>
-            <div class="col">
-                    <div class="container">
-                  <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="/static/img/jubilado-señalandose-profile.jpg" alt="Card image cap">
-                      <div class="card-body">
-                        <h5 class="card-title">Mi Informacion</h5>
+                      <a><button onclick="location.href='{% url 'classrooms' %}'" class="blue">VER CLASES</a>
+                </div>
+                  <div class="card">
+                      <img src="/static/img/jubilado-señalandose-profile.jpg">
+                        <h1 class="card-title">Mi Informacion</h1>
                         <p class="card-text">Aca podras ver tu informacion personal y modificarla si deseas</p>
-                        <a href="#" class="btn btn-primary">VER INFORMACION</a>
+                        <a><button href="#" class="blue">VER INFORMACION</a>
                       </div>
-              </div>
-          </div>
-              </div>
-          </div>
       </div>
 {% endblock body %}
-</html>
