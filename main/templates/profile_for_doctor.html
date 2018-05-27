@@ -1,0 +1,25 @@
+{% extends 'mainBase.html' %}
+{% load static %}
+{% block imports %}
+{% endblock imports %}
+{% block title %}
+Perfil doctor
+{% endblock title %}  
+{% block body %}
+<table>
+    <thead>
+        <tr>
+            <th>Fechas</th>
+            <th>Numero de turnos</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for day in doctor.getAllDays %}
+            <tr>
+                <td>{{ day }}</td>
+                <td>{{ day.getAppointmentsNumber }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock body %}  

@@ -67,7 +67,20 @@ def mLogOut(request):
     return render(request, 'login.html')
 
 def profile(request):
-    return render(request, 'profile.html')
+    results = {}
+    try:
+        retired = Retired.objects.get(user=request.user)
+        return render(request, 'profile_for_retired.html')
+    except Retired.DoesNotExist:
+        try:
+            results['doctor'] = Doctor.objects.get(user=request.user)
+            return render(request, 'profile_for_doctor.html', results)
+        except Doctor.DoesNotExist:
+            try:
+                results['teacher'] = Teacher.objects.get(user=request.user)
+                return render(request, 'profile_for_teacher.html', results)
+            except:
+                return HttpResponse("Tipo de usuario no identificado")
 
 def loadAppointments(request):
     results = {}

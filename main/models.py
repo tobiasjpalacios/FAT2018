@@ -49,6 +49,10 @@ class Doctor(Person):
                 results.add(a)
         return results
 
+    def getAllDays(self):
+        results = WorkDay.objects.filter(doctor=self)
+        return results
+
     def daysAvailable(self):
         if self.getDays():
             return True
@@ -90,7 +94,11 @@ class WorkDay(models.Model):
     def getAppointments(self):
         results = Appointment.objects.filter(day=self, retired=None)
         return results  
-    
+
+    def getAppointmentsNumber(self):
+        results = self.getAppointments().count()
+        return results
+
     def __str__(self):
         return "{}/{}".format(self.day.day, self.day.month)
 
