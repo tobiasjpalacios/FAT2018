@@ -42,9 +42,18 @@ class Doctor(Person):
     speciality = models.CharField(max_length=32)
     
     def getDays(self):
-        results = WorkDay.objects.filter(doctor=self)
+        results = set()
+        workdays = WorkDay.objects.filter(doctor=self)
+        for a in workdays:
+            if a.appointmentsAvailable():
+                results.add(a)
         return results
 
+    def daysAvailable(self):
+        if self.getDays():
+            return True
+        return False
+    
 class Teacher(Person):
     subject = models.CharField(max_length=32)
     
@@ -72,6 +81,11 @@ class RelationParticipe(models.Model):
 class WorkDay(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     day = models.DateField()
+
+    def appointmentsAvailable(self):
+        if Appointment.objects.filter(day=self, retired=None):
+            return True
+        return False
 
     def getAppointments(self):
         results = Appointment.objects.filter(day=self, retired=None)

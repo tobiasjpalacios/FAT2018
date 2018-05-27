@@ -1,24 +1,18 @@
 <div class="col s12">
-    <form>
-        <div class="card-panel teal">
-            <span class="white-text">
-                {% for workday in workdays %}
+    <div class="card-panel teal">
+        <span class="white-text">
+            {% for workday in doctor.getDays %}
+                <div class="row">
+                    {{ workday }}        
+                    {% for appointment in workday.getAppointments  %}
                     <div class="row">
-                        {{ workday }}
-                        {% if workday.getAppointments %}
-                            {% for appointment in workday.getAppointments  %}
-                            <div class="row">
-                                {{ appointment }} <button class="btn btn-flat" onclick="getAppointment({{ appointment.id }})">solicitar</button>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                           - No hay mas turnos disponibles para este dia
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </span>
-        </div>
-    </form>
+                        {{ appointment }} <button class="btn btn-flat" onclick="getAppointment({{ appointment.id }})">solicitar</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </span>
+    </div>
 </div>
 <script>
     function getAppointment(appointment_id){
@@ -30,7 +24,7 @@
                 id:appointment_id
             },
             success: function(result){
-                console.log(result)
+                window.location.href = "{% url 'appointments' %}"; 
             },
             error: function (request, status, error) {
                 console.log(request.responseText);

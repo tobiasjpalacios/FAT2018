@@ -71,7 +71,7 @@ def profile(request):
 
 def loadAppointments(request):
     results = {}
-    results['workdays'] = Doctor.objects.get(id=request.GET.get('id')).getDays()
+    results['doctor'] = Doctor.objects.get(id=request.GET.get('id'))
     return render(request, 'AppointmentInfo.html', results)
 
 @require_POST
