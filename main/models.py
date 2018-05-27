@@ -42,7 +42,7 @@ class Doctor(Person):
     speciality = models.CharField(max_length=32)
     
     def getDays(self):
-        results = Day.objects.filter(doctor=self)
+        results = WorkDay.objects.filter(doctor=self)
         return results
 
 class Teacher(Person):
@@ -64,21 +64,21 @@ class RelationRetired(models.Model):
         abstract = True
 
 class RelationParticipe(models.Model):
-    retired = models.ForeignKey(Retired, on_delete=models.CASCADE)
+    retired = models.ForeignKey(Retired, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         abstract = True
 
 class WorkDay(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    day = models.IntegerField(choices=DAYS_CHOICES, default=False)
+    day = models.DateField()
 
     def getAppointments(self):
-        results = Appointment.objects.filter(dat=self).retired
+        results = Appointment.objects.filter(day=self, retired=None)
         return results  
     
     def __str__(self):
-        return "{} - {}".format(self.doctor, self.day)
+        return "{}/{}".format(self.day.day, self.day.month)
 
 class Classroom(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
@@ -91,7 +91,7 @@ class Classroom(models.Model):
         return result
     
     def __str__(self):
-        return "{} - {}".format(self.name, self.day)
+        return "{}".format(self.name)
 
 class ClassroomDay(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
@@ -114,7 +114,6 @@ class Enrrolment(RelationParticipe):
 class Appointment(RelationParticipe):
     day = models.ForeignKey(WorkDay, on_delete=models.CASCADE)
     timeAttendance = models.TimeField()
-    start_hour = models.IntegerField()
     
     def __str__(self):
-        return "{} - {}".format(self.day, self.retired)
+        return "{}:{}".format(self.timeAttendance.hour, self.timeAttendance.minute)

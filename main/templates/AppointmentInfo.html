@@ -1,0 +1,40 @@
+<div class="col s12">
+    <form>
+        <div class="card-panel teal">
+            <span class="white-text">
+                {% for workday in workdays %}
+                    <div class="row">
+                        {{ workday }}
+                        {% if workday.getAppointments %}
+                            {% for appointment in workday.getAppointments  %}
+                            <div class="row">
+                                {{ appointment }} <button class="btn btn-flat" onclick="getAppointment({{ appointment.id }})">solicitar</button>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                           - No hay mas turnos disponibles para este dia
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </span>
+        </div>
+    </form>
+</div>
+<script>
+    function getAppointment(appointment_id){
+        $.ajax({
+            type: "POST",
+            url: "{% url 'requestAppointment' %}",   
+            data: {
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                id:appointment_id
+            },
+            success: function(result){
+                console.log(result)
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            }
+        });  
+    }
+</script>
