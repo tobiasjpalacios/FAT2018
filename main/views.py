@@ -85,7 +85,7 @@ def profile(request):
 def loadAppointments(request):
     results = {}
     results['doctor'] = Doctor.objects.get(id=request.GET.get('id'))
-    return render(request, 'AppointmentInfo.html', results)
+    return render(request, 'jquery_html/AppointmentInfo.html', results)
 
 @require_POST
 def requestAppointment(request):
