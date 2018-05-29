@@ -5,8 +5,10 @@
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         {% block imports %}
         {% endblock imports %}
         <title>
@@ -15,6 +17,19 @@
         </title>
     </head>
     <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="{% url 'main' %}" class="brand-logo">Pagina principal</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    {% if user.is_anonymous %}
+                    <li><a href="{% url 'mLogIn' %}">login</a></li>
+                    {% else %}
+                    <li><a href="{% url 'profile' %}">{{ user.get_full_name|default:user.username }}</a></li>
+                    <li><a href="{% url 'mLogOut' %}">logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
         {% block body %}
         {% endblock body %}        
     </body>

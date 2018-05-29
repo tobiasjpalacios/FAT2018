@@ -6,27 +6,70 @@
 Centro de jubilados
 {% endblock title %}
 {% block body %}
-<ul class="blue">
-    <li class="sans">
-        <a class="blue-hover nav-img"><img src="{% static "img/home.png" %}"></a>
-    </li>
-    <li class="no-borders">
-    <input type="text" placeholder="Buscar">
-    </li>
-    <li class="sans right">
-        <a class="blue-hover">Perfil</a>
-    </li>
-    <li class="sans right">
-        <a class="blue-hover">Cerrar sesión</a>
-    </li>
-</ul>
-
-<!--
-<div class="card shadow">
-    <img src="{% static "img/medico-atendiendo-profile.jpg" %}">
-    <h1 class="sans">Próximos turnos</h1>
-    <p class="sans">Acceda a su agenda de consultas médicas</p>
-    <button class="blue"><span>Entrar</span></button>
+<div class="parallax-container">
+    <div class="parallax"><img src="{% static 'img/anciano.jpg' %}"></div>
 </div>
--->
+<div class="row indigo lighten-2">
+    <div class="col s8 offset-s2 red lighten-1">
+        <div class="row">
+<div class="col s8 ">
+<div class="card blue-grey darken-1">
+<div class="card-content white-text">
+<span class="card-title">Card Title</span>
+<p>I am a very simple card. I am good at containing small bits of information.
+I am convenient because I require little markup to use effectively.</p>
+</div>
+<div class="card-action">
+<a href="#">This is a link</a>
+<a href="#">This is a link</a>
+</div>
+</div>
+</div>
+<div class="col s8 offset-s4 ">
+<div class="card blue-grey darken-1">
+<div class="card-content white-text">
+<span class="card-title">Card Title</span>
+<p>I am a very simple card. I am good at containing small bits of information.
+I am convenient because I require little markup to use effectively.</p>
+</div>
+<div class="card-action">
+<a href="#">This is a link</a>
+<a href="#">This is a link</a>
+</div>
+</div>
+</div>
+<div class="col s8">
+        <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+        <span class="card-title">Card Title</span>
+        <p>I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+        </div>
+        </div>
+        </div>
+        <div class="col s8 offset-s4">
+        <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+        <span class="card-title">Card Title</span>
+        <p>I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>  
+<script>
+$(document).ready(function(){
+    $('.parallax').parallax();
+});
+</script>
 {% endblock body %}   

@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import *
 import datetime
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 def main(request):
@@ -12,13 +14,15 @@ def main(request):
 def classrooms(request):
     results={}
     now = datetime.datetime.now()
-    results['clases']=Classroom.objects.filter(day__gte=now.date())
+    results['clases'] = ClassroomDay.objects.all()
+    results['days'] = DAYS_CHOICES
+    print("{}".format(DAYS_CHOICES[now.weekday()]))
+    print("{} {}/{}".format(now.strftime("%A"), 25, now.month))
     return render(request, 'classroom.html', results)
 
 def appointments(request):
     results = {}
-    now = datetime.datetime.now()
-    results['turnos'] = Day.objects.filter(day__gte=now.date())
+    results['doctors'] = Doctor.objects.all()
     return render(request, 'appointment.html', results)
 
 def teachers(request):
@@ -60,6 +64,35 @@ def mLogIn(request):
 
 def mLogOut(request):
     logout(request)
+    return render(request, 'login.html')
 
 def profile(request):
-    return render(request, 'profile.html')
+    results = {}
+    try:
+        retired = Retired.objects.get(user=request.user)
+        return render(request, 'profile_for_retired.html')
+    except Retired.DoesNotExist:
+        try:
+            results['doctor'] = Doctor.objects.get(user=request.user)
+            return render(request, 'profile_for_doctor.html', results)
+        except Doctor.DoesNotExist:
+            try:
+                results['teacher'] = Teacher.objects.get(user=request.user)
+                return render(request, 'profile_for_teacher.html', results)
+            except:
+                return HttpResponse("Tipo de usuario no identificado")
+
+def loadAppointments(request):
+    results = {}
+    results['doctor'] = Doctor.objects.get(id=request.GET.get('id'))
+    return render(request, 'jquery_html/AppointmentInfo.html', results)
+
+@require_POST
+def requestAppointment(request):
+    appointment = Appointment.objects.get(id=request.POST['id'])
+    if appointment.retired == None:
+        appointment.retired = Retired.objects.get(user=request.user)
+        appointment.save()
+        return HttpResponse("saved")
+    return HttpResponse("Error")
+    
