@@ -1,46 +1,35 @@
 {% extends 'mainBase.html' %}
 {% load static %}
 {% block imports %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 {% endblock imports %}
 {% block title %}
 {% endblock title %}  
 {% block body %}
-    <div class="container">
-        <form action="{% url 'createuser' %}" method="POST">
-            {% csrf_token %}
-            <h1 class="label">Crear usuario</h1>
-            <label class="label">Nombre</label>
-            <div class="form-group">
-                <input class="form-control" placeholder="Ingrese nombre" name="firstname">
+<div class="row">
+    <div class="col s8 offset-s2">
+        <div class="card-panel teal lighten-2">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="last_name" name="{{ form.personal_id.html_name }}" type="number" class="validate">
+                    <label for="last_name" class="white-text">{{ form.personal_id.label }}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="password" name="{{ form.password.html_name }}" type="password" class="validate">
+                    <label for="password" class="white-text">{{ form.password.label }}</label>
+                </div>
             </div>
-            <label class="label">Apellido</label>
-            <div class="form-group">
-                <input class="form-control" placeholder="Ingrese apellido" name="lastname">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="re_password" name="{{ form.re_password.html_name }}" type="password" class="validate">
+                    <label for="re_password" class="white-text">{{ form.re_password.label }}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="email" name="{{ form.email.html_name }}" type="email" class="validate">
+                    <label for="email" class="white-text">{{ form.email.label }}</label>
+                  </div>
             </div>
-            <label class="label">Documento</label>
-            <div class="form-group">
-                <input class="form-control" placeholder="Ingrese documento" name="personalid">
-            </div>
-            <label class="label">Correo electronico</label>
-            <div class="form-group">
-                <input class="form-control" type="email" placeholder="Ingrese correo electronico" name="email" >
-            </div>
-            <label class="label">Contraseña</label>
-            <div class="form-group">
-                <input class="form-control" type="password" id="password" placeholder="Ingrese su contraseña" name="password">
-            </div>
-            <label class="label">repita la contraseña</label>
-            <div class="form-group">
-                <input class="form-control" type="password" placeholder="Ingrese nuevamente la contraseña" name="repassword">
-            </div>
-            <div align="center">
-                <button type="submit" class="btn btn-outline-primary">Crear</button>    
-            </div>
-        </form>
+        </div>
     </div>
-
-<script>
-$('body').css('background-image', 'url("{% static "img/Butterfly.jpg" %}")')
-</script>
+</div>
+<button class="btn btn-flat" type="submit">enviar</button>
 {% endblock body %}  

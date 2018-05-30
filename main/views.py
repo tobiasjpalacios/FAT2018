@@ -49,7 +49,9 @@ def createuser(request):
             retired = Retired.objects.create(user=user)
             retired.save()
             return redirect(main)
-    return render(request, 'create_user.html')
+    else:
+        results['form'] = Registro()
+    return render(request, 'create_user.html', results)
 
 def mLogIn(request):
     if request.method == "POST":

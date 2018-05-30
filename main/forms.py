@@ -30,3 +30,9 @@ class ClassRoomForm(forms.Form):
 class ClassDayForm(forms.Form):
     day = forms.ChoiceField(choices=DAYS_CHOICES)
     start_hour =forms.IntegerField(label='hora de inicio')
+
+class Registro(forms.Form):
+    personal_id = forms.IntegerField(label='Documento')
+    password = forms.CharField(label='Contraseña')
+    re_password = forms.CharField(label='Repita la contraseña')
+    email = forms.CharField(label='Correo electronico', required=False)
