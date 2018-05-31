@@ -16,9 +16,9 @@
             {% endblock title %}        
         </title>
     </head>
-    <body>
+    <body class="indigo lighten-3">
         <nav>
-            <div class="nav-wrapper">
+            <div class="nav-wrapper indigo lighten-1">
                 <a href="{% url 'main' %}" class="brand-logo">Pagina principal</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     {% if user.is_anonymous %}
@@ -31,6 +31,34 @@
             </div>
         </nav>
         {% block body %}
-        {% endblock body %}        
+        {% endblock body %}  
+        <footer class="page-footer footer-up indigo lighten-1">
+            <div class="container center-align">
+                <div class="row">
+                        <span>
+                            Integrantes
+                        </span>
+                        <div class="row">
+                            <ul>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/SebastianQuintero">Quintero, Juan [GitHub]</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/MatiasBoldini">Boldini, Matias [GitHub]</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/AbelardoGarcia">Garcia, Abelardo [GitHub]</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/Marcos-Corvalan">Corvalan, marcos [GitHub]</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/tobiasjpalacios">Palacios, tobias [GitHub]</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/francobossio">Bossio, Franco [GitHub]</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/MisaelVasconcelos">Vasconcelos, Misael [GitHub]</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://github.com/brunoramosmarino">Ramos, Bruno [GitHub]</a></li>
+                            </ul>
+                        </div>
+                </div>
+                {% block page %}
+                {% endblock page %}
+            </div>
+            <div class="footer-copyright footer-down indigo">
+                <div class="container center-align">
+                    "Cambiar por frase motivacional"
+                </div>
+            </div>
+        </footer>      
     </body>
 </html>

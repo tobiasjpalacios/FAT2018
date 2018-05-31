@@ -3,6 +3,7 @@
 {% block imports %}
 {% endblock imports %}
 {% block title %}
+Registro
 {% endblock title %}  
 {% block body %}
 <div class="row">
@@ -22,19 +23,17 @@
                 </div>
                 <div class="row">
                     <div class="col s4 input-field">
-{{ form.personal_id }}
-<label for="{{ form.personal_id.id_for_label }}">{{ form.personal_id.label }}</label>
+{{ form.username }}
+<label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
                 </div>
                     <div class="col s8 input-field">
 {{ form.email }}
 <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                     </div>
                 </div>
-{% if username_Er %}
 <div class="col s12 center pink-text">
-El numero de documento ya esta usado
+{{ form.username.errors }}
 </div>
-{% endif %}
                 <div class="row">
                     <div class="col s3 input-field">
 {{ form.password }}
@@ -48,16 +47,16 @@ El numero de documento ya esta usado
 {{ form.re_password }}
 <label for="{{ form.re_password.id_for_label }}">{{ form.re_password.label }}</label>
                     </div>
-{% if password_Er %}
+<div class="row">
 <div class="col s12 center pink-text">
-las contraseñas no coinciden
+{{ form.password.errors }}
 </div>
-{% endif %}
-{% if succeed %}
+</div>
+<div class="row">
 <div class="col s12 center green-text">
-Usuario registrado!
+{{ form.succes }}
 </div>
-{% endif %}
+</div>
                 </div>
                 <div class="row">
                     <center>

@@ -6,6 +6,7 @@ from .models import *
 import datetime
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
+from django.utils import six 
 
 # Create your views here.
 def main(request):
@@ -33,60 +34,49 @@ def days(request):
 
 def createuser(request):
     results={}
+    results['form'] = RegistroForm()
     if request.method == "POST":
-        form = Registro(request.POST)
+        form = RegistroForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data["first_name"]
-            last_name = form.cleaned_data["last_name"]
-            username = form.cleaned_data["personal_id"]
-            email = form.cleaned_data["email"]
-            password = form.cleaned_data["password"]
-            re_password = form.cleaned_data["re_password"]
-            user_type = form.cleaned_data["user_type"]
-            if password == re_password:
-                if not User.objects.filter(username=username).exists():
-                    new_user = User.objects.create_user(username, email, password)
-                    new_user.is_active = False
-                    new_user.first_name = first_name
-                    new_user.last_name = last_name
-                    new_user.save()
-                    if user_type == "0":
-                        new_usertype = Retired(user=new_user)
-                    else:
-                        if user_type == "1":
-                            new_usertype = Doctor(user=new_user)
-                        else:
-                            if user_type == "2":
-                                new_usertype = Teacher(user=new_user)   
-                            else:
-                                raise ValueError('user type not found, our errors')
-                    new_usertype.save()
-                    results["succeed"] = True
-                    results['form'] = Registro()
-                    return render(request, 'create_user.html', results)
-                else:
-                    results["username_Er"] = True
-            else:
-                results["password_Er"] = True
+            u = User()
+            u.first_name=request.POST.get("first_name")
+            u.last_name=request.POST.get("last_name")
+            u.username=request.POST.get("username")
+            u.email=request.POST.get("email")
+            u.set_password(request.POST.get("password"))
+            user_type = int(request.POST.get("user_type"))
+            if user_type ==0:
+                ut = Retired()
+            elif user_type ==1:
+                ut = Doctor()
+            elif user_type ==2:
+                ut = Teacher()
+            u.save()
+            ut.user=u
+            ut.save()
+            redirect(main)
         results['form'] = form
-    else :
-        results['form'] = Registro()
     return render(request, 'create_user.html', results)
 
 def mLogIn(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
     if not request.user.is_authenticated:
-        return render(request, 'login.html')
+        results={}
+        results["form"] = LoginForm()
+        if request.method == "POST":
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                user = authenticate(request, username=request.POST.get("username"), password=request.POST.get("password"))
+                if user is not None:
+                    login(request, user)
+                    return redirect(main)
+            else:
+                results["form"] = form
+        return render(request, 'login.html', results)
     return redirect(main)
 
 def mLogOut(request):
     logout(request)
-    return render(request, 'login.html')
+    return redirect(mLogIn)
 
 def profile(request):
     results = {}
