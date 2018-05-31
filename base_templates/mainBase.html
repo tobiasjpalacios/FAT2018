@@ -30,8 +30,10 @@
                 </ul>
             </div>
         </nav>
-        {% block body %}
-        {% endblock body %}  
+        <main>
+            {% block body %}
+            {% endblock body %}    
+        </main>
         <footer class="page-footer footer-up indigo lighten-1">
             <div class="container center-align">
                 <div class="row">
@@ -59,6 +61,16 @@
                     "Cambiar por frase motivacional"
                 </div>
             </div>
-        </footer>      
+        </footer>  
+        <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        </style>
     </body>
 </html>

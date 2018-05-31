@@ -81,8 +81,8 @@ def mLogOut(request):
 def profile(request):
     results = {}
     try:
-        retired = Retired.objects.get(user=request.user)
-        return render(request, 'profile_for_retired.html')
+        results['retired'] = Retired.objects.get(user=request.user)
+        return render(request, 'profile_for_retired.html', results)
     except Retired.DoesNotExist:
         try:
             results['doctor'] = Doctor.objects.get(user=request.user)

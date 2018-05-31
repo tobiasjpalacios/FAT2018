@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-
+import datetime
+from django.db.models import Q
 
 DAYS_CHOICES = (
     (0, 'Lunes'),
@@ -30,13 +31,17 @@ class Retired(Person):
             return True
         return False
     
-    def getClassrooms(self):
-        result = Classroom.objects.filter(retired=self)
-        return result
+    def getEnrrolments(self):
+        result = Enrrolment.objects.filter(retired=self)
+        if result.count() > 0:
+            return result
+        return False
 
     def getAppointments(self):
-        result = Appointment.objects.filter(retired=self)
-        return result
+        result = Appointment.objects.filter(retired=self).filter(Q(workday__day__gte=datetime.date.today()))
+        if result.count() > 0:
+            return result
+        return False
         
 class Doctor(Person):
     speciality = models.CharField(max_length=32)
@@ -86,11 +91,6 @@ class WorkDay(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     day = models.DateField()
 
-    def appointmentsAvailable(self):
-        if Appointment.objects.filter(day=self, retired=None):
-            return True
-        return False
-
     def getAppointments(self):
         results = Appointment.objects.filter(day=self, retired=None)
         return results  
@@ -109,16 +109,23 @@ class Classroom(models.Model):
     description = models.CharField(max_length=256)
 
     def getStudents(self):
-        result = Enrrolment.objects.filter(classroom=self).retired
+        enrrolments = Enrrolment.objects.filter(classroom=self)
+        result = set()
+        for enrrolment in enrrolments:
+            result.add(enrrolment.retired)
         return result
-    
+
+    def getClassroomDays(self):
+        result = ClassroomDay.objects.filter(classroom=self)
+        return result
+
     def __str__(self):
         return "{}".format(self.name)
 
 class ClassroomDay(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
-    day = models.IntegerField(choices=DAYS_CHOICES, default=False)
-    start_hour = models.IntegerField()
+    day = models.DateField()
+    start_hour = models.TimeField()
     
 
 class Affiliate(RelationRetired):
@@ -130,12 +137,22 @@ class Partner(RelationRetired):
 class Enrrolment(RelationParticipe):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
 
+    def nextDay(self):
+        classroomDays = self.classroom.getClassroomDays()
+        for classroomDay in classroomDays:
+            if classroomDay.day > datetime.date.today():
+                return classroomDay
+        return False
+
     def __str__(self):
-        return "{} - {}".format(self.classroom, self.retired)
+        classroomDay = self.nextDay()
+        if classroomDay:
+            return "{} {}".format(self.classroom.name, classroomDay.day)
+        return "{} - {}".format(self.classroom.name, "No hay fechas disponibles")
 
 class Appointment(RelationParticipe):
-    day = models.ForeignKey(WorkDay, on_delete=models.CASCADE)
+    workday = models.ForeignKey(WorkDay, on_delete=models.CASCADE)
     timeAttendance = models.TimeField()
     
     def __str__(self):
-        return "{}:{}".format(self.timeAttendance.hour, self.timeAttendance.minute)
+        return "{} {}".format(self.workday.doctor.speciality, self.workday.day)
