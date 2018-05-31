@@ -36,11 +36,15 @@ El numero de documento ya esta usado
 </div>
 {% endif %}
                 <div class="row">
-                    <div class="col s6 input-field">
+                    <div class="col s3 input-field">
 {{ form.password }}
 <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
                     </div>
                     <div class="col s6 input-field">
+{{ form.user_type }}
+<label for="{{ form.user_type.id_for_label }}">{{ form.user_type.label }}</label>
+                    </div>
+                    <div class="col s3 input-field">
 {{ form.re_password }}
 <label for="{{ form.re_password.id_for_label }}">{{ form.re_password.label }}</label>
                     </div>
@@ -57,12 +61,16 @@ Usuario registrado!
                 </div>
                 <div class="row">
                     <center>
-                        <button class="btn btn-flat" type="submit">Send</button>
+                        <button class="btn btn-flat" type="submit">Registrarse</button>
                     </center>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<script>
+$(document).ready(function(){
+    $('select').formSelect();
+});
+</script>
 {% endblock body %}  
