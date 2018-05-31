@@ -34,22 +34,32 @@ def days(request):
 def createuser(request):
     results={}
     if request.method == "POST":
-        username = request.POST["personalid"]
-        first_name = request.POST["firstname"]
-        last_name = request.POST["lastname"]
-        email = request.POST["email"]
-        password = request.POST["password"]
-        repassword = request.POST["repassword"]
-        if password == repassword:
-            user = User.objects.create_user(username, email, password)
-            user.first_name = first_name
-            user.last_name = last_name
-            user.save()
-            login(request, user)
-            retired = Retired.objects.create(user=user)
-            retired.save()
-            return redirect(main)
-    return render(request, 'create_user.html')
+        form = Registro(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            username = form.cleaned_data["personal_id"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            re_password = form.cleaned_data["re_password"]
+            if password == re_password:
+                if not User.objects.filter(username=username).exists():
+                    new_user = User.objects.create_user(username, email, password)
+                    new_user.is_active = False
+                    new_user.first_name = first_name
+                    new_user.last_name = last_name
+                    new_user.save()
+                    results["succeed"] = True
+                    results['form'] = Registro()
+                    return render(request, 'create_user.html', results)
+                else:
+                    results["username_Er"] = True
+            else:
+                results["password_Er"] = True
+        results['form'] = form
+    else :
+        results['form'] = Registro()
+    return render(request, 'create_user.html', results)
 
 def mLogIn(request):
     if request.method == "POST":

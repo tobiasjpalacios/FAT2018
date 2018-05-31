@@ -1,46 +1,68 @@
 {% extends 'mainBase.html' %}
 {% load static %}
 {% block imports %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 {% endblock imports %}
 {% block title %}
 {% endblock title %}  
 {% block body %}
-    <div class="container">
-        <form action="{% url 'createuser' %}" method="POST">
-            {% csrf_token %}
-            <h1 class="label">Crear usuario</h1>
-            <label class="label">Nombre</label>
-            <div class="form-group">
-                <input class="form-control" placeholder="Ingrese nombre" name="firstname">
-            </div>
-            <label class="label">Apellido</label>
-            <div class="form-group">
-                <input class="form-control" placeholder="Ingrese apellido" name="lastname">
-            </div>
-            <label class="label">Documento</label>
-            <div class="form-group">
-                <input class="form-control" placeholder="Ingrese documento" name="personalid">
-            </div>
-            <label class="label">Correo electronico</label>
-            <div class="form-group">
-                <input class="form-control" type="email" placeholder="Ingrese correo electronico" name="email" >
-            </div>
-            <label class="label">Contraseña</label>
-            <div class="form-group">
-                <input class="form-control" type="password" id="password" placeholder="Ingrese su contraseña" name="password">
-            </div>
-            <label class="label">repita la contraseña</label>
-            <div class="form-group">
-                <input class="form-control" type="password" placeholder="Ingrese nuevamente la contraseña" name="repassword">
-            </div>
-            <div align="center">
-                <button type="submit" class="btn btn-outline-primary">Crear</button>    
-            </div>
-        </form>
+<div class="row">
+    <div class="col s6 offset-s3">
+        <div class="card-panel">
+            <form action="{% url 'createuser' %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                        <div class="col s7 input-field">
+{{ form.first_name }}
+<label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                        </div>
+                        <div class="col s5 input-field">
+{{ form.last_name }}
+<label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col s4 input-field">
+{{ form.personal_id }}
+<label for="{{ form.personal_id.id_for_label }}">{{ form.personal_id.label }}</label>
+                </div>
+                    <div class="col s8 input-field">
+{{ form.email }}
+<label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    </div>
+                </div>
+{% if username_Er %}
+<div class="col s12 center pink-text">
+El numero de documento ya esta usado
+</div>
+{% endif %}
+                <div class="row">
+                    <div class="col s6 input-field">
+{{ form.password }}
+<label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    </div>
+                    <div class="col s6 input-field">
+{{ form.re_password }}
+<label for="{{ form.re_password.id_for_label }}">{{ form.re_password.label }}</label>
+                    </div>
+{% if password_Er %}
+<div class="col s12 center pink-text">
+las contraseñas no coinciden
+</div>
+{% endif %}
+{% if succeed %}
+<div class="col s12 center green-text">
+Usuario registrado!
+</div>
+{% endif %}
+                </div>
+                <div class="row">
+                    <center>
+                        <button class="btn btn-flat" type="submit">Send</button>
+                    </center>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
-<script>
-$('body').css('background-image', 'url("{% static "img/Butterfly.jpg" %}")')
-</script>
 {% endblock body %}  
