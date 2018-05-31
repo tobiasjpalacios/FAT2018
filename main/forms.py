@@ -12,6 +12,11 @@ DAYS_CHOICES = (
     (4, 'Viernes')
 )
 
+USER_TYPE_CHOICES = (
+    (0, 'Jubilado'),
+    (1, 'Doctor'),
+    (2, 'Profesor')
+)
 
 class DayForm(forms.Form):
     start_hour = forms.TimeField(label='Hora de inicio')
@@ -38,3 +43,6 @@ class Registro(forms.Form):
     password = forms.CharField(label='Contraseña', widget=forms.PasswordInput())
     re_password = forms.CharField(label='Repita la contraseña', widget=forms.PasswordInput())
     email = forms.CharField(label='Correo electronico', required=False)
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, label='tipo de usuario')
+
+    

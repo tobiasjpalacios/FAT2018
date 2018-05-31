@@ -42,6 +42,7 @@ def createuser(request):
             email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
             re_password = form.cleaned_data["re_password"]
+            user_type = form.cleaned_data["user_type"]
             if password == re_password:
                 if not User.objects.filter(username=username).exists():
                     new_user = User.objects.create_user(username, email, password)
@@ -49,6 +50,17 @@ def createuser(request):
                     new_user.first_name = first_name
                     new_user.last_name = last_name
                     new_user.save()
+                    if user_type == "0":
+                        new_usertype = Retired(user=new_user)
+                    else:
+                        if user_type == "1":
+                            new_usertype = Doctor(user=new_user)
+                        else:
+                            if user_type == "2":
+                                new_usertype = Teacher(user=new_user)   
+                            else:
+                                raise ValueError('user type not found, our errors')
+                    new_usertype.save()
                     results["succeed"] = True
                     results['form'] = Registro()
                     return render(request, 'create_user.html', results)
