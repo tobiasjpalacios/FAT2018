@@ -32,7 +32,9 @@ class ClassDayForm(forms.Form):
     start_hour =forms.IntegerField(label='hora de inicio')
 
 class Registro(forms.Form):
+    first_name = forms.CharField(label='nombre')
+    last_name = forms.CharField(label='apellido')
     personal_id = forms.IntegerField(label='Documento')
-    password = forms.CharField(label='Contraseña')
-    re_password = forms.CharField(label='Repita la contraseña')
+    password = forms.CharField(label='Contraseña', widget=forms.PasswordInput())
+    re_password = forms.CharField(label='Repita la contraseña', widget=forms.PasswordInput())
     email = forms.CharField(label='Correo electronico', required=False)
