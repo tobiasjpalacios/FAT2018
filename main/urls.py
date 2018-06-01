@@ -13,4 +13,6 @@ urlpatterns = [
     path('loadAppointments/', loadAppointments, name='loadAppointments'),
     path('requestAppointment/', requestAppointment, name='requestAppointment'),
     path('deleteAppointment/', deleteAppointment, name='deleteAppointment'),
+    path('loadWorkDayForm/', loadWorkDayForm, name='loadWorkDayForm'),
+    path('addWorkDayForms/', addWorkDayForm, name='addWorkDayForm'),
 ]

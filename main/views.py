@@ -97,7 +97,7 @@ def profile(request):
 @require_GET
 def loadAppointments(request):
     results = {}
-    results['workdays'] = Doctor.objects.get(id=request.GET.get('doctor_id')).getDays()
+    results['workdays'] = Doctor.objects.get(id=request.GET.get('doctor_id')).daysAvailable()
     return render(request, 'jquery_html/AppointmentInfo.html', results)
 
 @require_POST
@@ -117,3 +117,20 @@ def deleteAppointment(request):
     appointment.save()
     return HttpResponse("OK")
     
+@require_GET
+def loadWorkDayForm(request):
+    results={}
+    results['form'] = WorkDayForm()
+    return render(request, 'jquery_html/WorkDayForm.html', results)
+
+@require_POST
+def addWorkDayForm(request):
+    results = {}
+    results['doctor'] = Doctor.objects.get(user=request.user)
+    form = WorkDayForm(request.POST)
+    if form.is_valid():
+        day = request.POST.get('day')
+        new_workDay = WorkDay(doctor=results['doctor'], day=day)
+        new_workDay.save() 
+    results['form'] = form
+    return render(request, 'profile_for_doctor.html', results)

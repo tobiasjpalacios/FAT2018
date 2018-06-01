@@ -19,7 +19,7 @@
     <body class="indigo lighten-3">
         <nav>
             <div class="nav-wrapper indigo lighten-1">
-                <a href="{% url 'main' %}" class="brand-logo">Pagina principal</a>
+                <a href="{% url 'main' %}" class="brand-logo"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     {% if user.is_anonymous %}
                     <li><a href="{% url 'mLogIn' %}">login</a></li>

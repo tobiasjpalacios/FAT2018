@@ -1,0 +1,36 @@
+<form action="{% url 'addWorkDayForm' %}" method="POST">
+    {% csrf_token %}
+    <div class="input-field">
+        <input type="text" class="datepicker" name="{{ form.day.html_name }}">
+        <label for="{{ form.day.id_for_label }}">{{ form.day.label }}</label>
+    </div>
+    <div class="input-field">
+        <input type="text" class="timepicker" name="{{ form.start_hour.html_name }}">
+        <label for="{{ form.start_hour.id_for_label }}">{{ form.start_hour.label }}</label>
+    </div>
+    <div class="input-field">
+        <input type="text" class="timepicker" name="{{ form.finish_hour.html_name }}">
+        <label for="{{ form.finish_hour.id_for_label }}">{{ form.finish_hour.label }}</label>
+    </div>
+    <div class="input-field">
+        <input type="text" class="timepicker" name="{{ form.duration.html_name }}">
+        <label for="{{ form.duration.id_for_label }}">{{ form.duration.label }}</label>
+    </div>
+    <div class="input-field">
+        <input type="text" class="timepicker" name="{{ form.interval.html_name }}">
+        <label for="{{ form.interval.id_for_label }}">{{ form.interval.label }}</label>
+    </div>
+    <center>
+        <button type="submit" class="btn btn-flat">Agregar</button>
+    </center>
+</form>
+<script>
+$(document).ready(function(){
+    $('.datepicker').datepicker({
+        format: 'yyyy/mm/dd'
+    });
+    $('.timepicker').timepicker({
+        twelveHour:false
+    });
+});
+</script>
