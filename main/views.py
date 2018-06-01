@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 import datetime
 from django.http import HttpResponse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.utils import six 
 
 # Create your views here.
@@ -94,9 +94,10 @@ def profile(request):
             except:
                 return HttpResponse("Tipo de usuario no identificado")
 
+@require_GET
 def loadAppointments(request):
     results = {}
-    results['doctor'] = Doctor.objects.get(id=request.GET.get('id'))
+    results['workdays'] = Doctor.objects.get(id=request.GET.get('doctor_id')).getDays()
     return render(request, 'jquery_html/AppointmentInfo.html', results)
 
 @require_POST
@@ -105,6 +106,14 @@ def requestAppointment(request):
     if appointment.retired == None:
         appointment.retired = Retired.objects.get(user=request.user)
         appointment.save()
-        return HttpResponse("saved")
+        return HttpResponse("OK")
     return HttpResponse("Error")
+
+@require_POST
+def deleteAppointment(request):
+    appointment_id = request.POST.get('appointment_id')
+    appointment = Appointment.objects.get(id=appointment_id)
+    appointment.retired = None
+    appointment.save()
+    return HttpResponse("OK")
     

@@ -12,4 +12,5 @@ urlpatterns = [
     path('mlogout/', mLogOut, name='mLogOut'),
     path('loadAppointments/', loadAppointments, name='loadAppointments'),
     path('requestAppointment/', requestAppointment, name='requestAppointment'),
+    path('deleteAppointment/', deleteAppointment, name='deleteAppointment'),
 ]

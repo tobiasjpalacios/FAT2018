@@ -43,7 +43,7 @@ function loadAppointments(doctor_id){
         type: "GET",
         url: "{% url 'loadAppointments' %}",   
         data: {
-            id:doctor_id
+            doctor_id:doctor_id
         },
         success: function(result){
             $("#block-" + doctor_id).html(result)        

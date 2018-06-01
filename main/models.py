@@ -44,27 +44,29 @@ class Retired(Person):
         return False
         
 class Doctor(Person):
-    speciality = models.CharField(max_length=32)
+    speciality = models.CharField(max_length=32, default="No especificado")
     
     def getDays(self):
-        results = set()
-        workdays = WorkDay.objects.filter(doctor=self)
-        for a in workdays:
-            if a.appointmentsAvailable():
-                results.add(a)
-        return results
+        wanted_items = set()
+        workdays = self.getAllDays()
+        for workday in workdays:
+            if workday.day > datetime.date.today():
+                wanted_items.add(workday.pk)
+        return WorkDay.objects.filter(pk__in = wanted_items)
 
     def getAllDays(self):
         results = WorkDay.objects.filter(doctor=self)
         return results
 
     def daysAvailable(self):
-        if self.getDays():
-            return True
+        workdays = self.getDays()
+        for workday in workdays:
+            if workday.getAppointments():
+                return True
         return False
     
 class Teacher(Person):
-    subject = models.CharField(max_length=32)
+    subject = models.CharField(max_length=32, default="No especificado")
     
     def getClassrooms(self):
         my_Classrooms = Classroom.objects.filter(teacher=self)
@@ -92,8 +94,10 @@ class WorkDay(models.Model):
     day = models.DateField()
 
     def getAppointments(self):
-        results = Appointment.objects.filter(day=self, retired=None)
-        return results  
+        results = Appointment.objects.filter(workday=self, retired=None)
+        if results.count() > 0:
+            return results
+        return False  
 
     def getAppointmentsNumber(self):
         results = self.getAppointments().count()
