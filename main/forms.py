@@ -22,12 +22,10 @@ USER_TYPE_CHOICES = (
 class WorkDayForm(forms.Form):
     start_hour = forms.TimeField(label='Hora de inicio')
     finish_hour = forms.TimeField(label='Hora de finalizacion')
-    day = forms.DateField(label='Fecha', initial=datetime.date.today())
+    day = forms.DateField(label='Fecha')
     duration = forms.TimeField(label='Duracion de cada turno Aprox.')
     interval = forms.TimeField(label='Intervalo entre turnos')
-
-    def clean(self):
-        pass
+    
 
 
 class ClassRoomForm(forms.Form):
