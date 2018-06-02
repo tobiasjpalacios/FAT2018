@@ -145,6 +145,13 @@ def addWorkDayForm(request):
     results['form'] = form
     return render(request, 'profile_for_doctor.html', results)
 
+@require_POST
+def deleteWorkDay(request):
+    workday_id = request.POST.get('workday_id')
+    workday = WorkDay.objects.get(id=workday_id).delete()
+    return HttpResponse("OK")
+
+
 
 def toMinutes(time):
     minute = time.minute

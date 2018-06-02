@@ -15,4 +15,5 @@ urlpatterns = [
     path('deleteAppointment/', deleteAppointment, name='deleteAppointment'),
     path('loadWorkDayForm/', loadWorkDayForm, name='loadWorkDayForm'),
     path('addWorkDayForms/', addWorkDayForm, name='addWorkDayForm'),
+    path('deleteWorkDay/', deleteWorkDay, name='deleteWorkDay'),
 ]

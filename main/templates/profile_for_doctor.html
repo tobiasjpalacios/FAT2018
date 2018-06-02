@@ -55,6 +55,7 @@ Perfil doctor
                                 no hay turnos para este dia todavia
                             </div>
                         {% endif %}
+                        <center><button class="btn btn-flat" onclick="removeWorkDay({{ workday.id }})">Eliminar dia de trabajo</button></center>    
                     </div>
                 {% endfor %}
             </div>
@@ -77,6 +78,22 @@ function loadWorkDayHtml(){
             alert(request.responseText);
         }
     });  
+}
+function removeWorkDay(workday_id){
+    $.ajax({
+        type: "POST",
+        url: "{% url 'deleteWorkDay' %}",
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            workday_id: workday_id
+        },
+        success: function(result){
+            window.location.href = "{% url 'profile' %}"; 
+        },
+        error: function (request, status, error){
+                alert(request.responseText)
+        }
+    })
 }
 </script>
 {% endblock body %}  
