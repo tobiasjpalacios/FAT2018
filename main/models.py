@@ -50,7 +50,7 @@ class Doctor(Person):
         wanted_items = set()
         workdays = self.getAllDays()
         for workday in workdays:
-            if workday.day > datetime.date.today():
+            if workday.day >= datetime.date.today():
                 wanted_items.add(workday.pk)
         return WorkDay.objects.filter(pk__in = wanted_items)
 

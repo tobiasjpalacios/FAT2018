@@ -6,7 +6,9 @@ from .models import *
 import datetime
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST, require_GET
-from django.utils import six 
+from django.utils import six
+from django.utils.dateparse import parse_time
+
 
 # Create your views here.
 def main(request):
@@ -130,7 +132,32 @@ def addWorkDayForm(request):
     form = WorkDayForm(request.POST)
     if form.is_valid():
         day = request.POST.get('day')
-        new_workDay = WorkDay(doctor=results['doctor'], day=day)
-        new_workDay.save() 
+        workday, created = WorkDay.objects.get_or_create(doctor=results['doctor'], day=day)
+        start_min = toMinutes(parse_time(request.POST.get('start_hour')))
+        finish_min = toMinutes(parse_time(request.POST.get('finish_hour')))
+        duration = toMinutes(parse_time(request.POST.get('duration'))) + toMinutes(parse_time(request.POST.get('interval')))
+        while start_min < finish_min:
+            hour = toTime(start_min)
+            appointment = Appointment(workday=workday, timeAttendance=hour)
+            appointment.save()
+            start_min +=duration
+        return redirect(profile)
     results['form'] = form
     return render(request, 'profile_for_doctor.html', results)
+
+
+def toMinutes(time):
+    minute = time.minute
+    hours = time.hour
+    while hours > 0:
+        minute += 60
+        hours -= 1
+    return minute
+
+def toTime(time):
+    minute = time
+    hour = 0
+    while minute >= 60:
+        hour += 1
+        minute -= 60
+    return datetime.time(hour, minute)
