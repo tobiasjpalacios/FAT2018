@@ -169,4 +169,4 @@ class Appointment(RelationParticipe):
     timeAttendance = models.TimeField()
     
     def __str__(self):
-        return "{} {}".format(self.workday.doctor.speciality, self.workday.day)
+        return "{}".format(self.timeAttendance)

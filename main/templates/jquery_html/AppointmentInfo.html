@@ -1,20 +1,21 @@
 <div class="col s12">
-    <div class="card-panel teal">
-        <span class="white-text">
-            {% for workday in workdays %}
-                <div class="row">
-                    {{ workday }}        
-                    {% for appointment in workday.getAppointments  %}
-                    <div class="row">
-                        {{ appointment }} <button class="btn btn-flat" onclick="getAppointment({{ appointment.id }})">solicitar</button>
-                        </div>
+    <ul class="collapsible">
+        {% for workday in workdays %}
+            <li>
+                <div class="collapsible-header"><i class="material-icons">date_range</i>{{ workday }}</div>
+                <div class="collapsible-body white">
+                    {% for appointment in workday.getAppointments %}
+                        <p>{{ appointment }} <button class="btn btn-flat">solicitar</button></p>
                     {% endfor %}
                 </div>
-            {% endfor %}
-        </span>
-    </div>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 <script>
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+    });
     function getAppointment(appointment_id){
         $.ajax({
             type: "POST",
