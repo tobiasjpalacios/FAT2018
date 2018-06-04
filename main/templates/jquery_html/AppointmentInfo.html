@@ -5,7 +5,7 @@
                 <div class="collapsible-header"><i class="material-icons">date_range</i>{{ workday }}</div>
                 <div class="collapsible-body white">
                     {% for appointment in workday.getAppointments %}
-                        <p>{{ appointment }} <button class="btn btn-flat">solicitar</button></p>
+                        <p>{{ appointment }} <button onclick="getAppointment({{ appointment.id }})" class="btn btn-flat">solicitar</button></p>
                     {% endfor %}
                 </div>
             </li>
