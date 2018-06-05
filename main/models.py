@@ -44,7 +44,6 @@ class Retired(Person):
         return False
         
 class Doctor(Person):
-    speciality = models.CharField(max_length=32)
     
     def getDays(self):
         wanted_items = set()

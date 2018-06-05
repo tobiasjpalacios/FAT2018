@@ -78,8 +78,8 @@ Centro de jubilados
     </div>  
 </div>
 <script>
-$(document).ready(function(){
-    $('.parallax').parallax();
-});
+    {% if message %}
+        M.toast({html: "{{ message_text }}", classes: 'rounded'});
+    {% endif %}
 </script>
 {% endblock body %}   

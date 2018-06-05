@@ -31,9 +31,6 @@ Registro
 <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                     </div>
                 </div>
-<div class="col s12 center pink-text">
-{{ form.username.errors }}
-</div>
                 <div class="row">
                     <div class="col s3 input-field">
 {{ form.password }}
@@ -50,11 +47,7 @@ Registro
 <div class="row">
 <div class="col s12 center pink-text">
 {{ form.password.errors }}
-</div>
-</div>
-<div class="row">
-<div class="col s12 center green-text">
-{{ form.succes }}
+{{ form.username.errors }}
 </div>
 </div>
                 </div>

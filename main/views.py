@@ -12,7 +12,8 @@ from django.utils.dateparse import parse_time
 
 # Create your views here.
 def main(request):
-    return render(request, 'main.html')
+    results = {}
+    return render(request, 'main.html', results)
     
 def classrooms(request):
     results={}
@@ -56,7 +57,10 @@ def createuser(request):
             u.save()
             ut.user=u
             ut.save()
-            redirect(main)
+            login(request, u)
+            results["message"] = True
+            results["message_text"] = "{} tu usuario ha sido creado".format(u.first_name)
+            return render(request, 'main.html', results)
         results['form'] = form
     return render(request, 'create_user.html', results)
 
@@ -70,15 +74,20 @@ def mLogIn(request):
                 user = authenticate(request, username=request.POST.get("username"), password=request.POST.get("password"))
                 if user is not None:
                     login(request, user)
-                    return redirect(main)
+                    results["message"] = True
+                    results["message_text"] = "{} has sido logueado".format(user.first_name)
+                    return render(request, 'main.html', results)
             else:
                 results["form"] = form
         return render(request, 'login.html', results)
     return redirect(main)
 
 def mLogOut(request):
+    results = {}
+    results["message"] = True
+    results["message_text"] = "{} has sido deslogueado".format(request.user.first_name)
     logout(request)
-    return redirect(mLogIn)
+    return render(request, 'main.html', results)    
 
 def profile(request):
     results = {}
