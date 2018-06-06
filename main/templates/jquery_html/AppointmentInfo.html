@@ -5,31 +5,10 @@
                 <div class="collapsible-header"><i class="material-icons">date_range</i>{{ workday }}</div>
                 <div class="collapsible-body white">
                     {% for appointment in workday.getAppointments %}
-                        <p>{{ appointment }} <button onclick="getAppointment({{ appointment.id }})" class="btn btn-flat">solicitar</button></p>
+                        <p>{{ appointment }} <button onclick="getAppointment({{ appointment.id }}, {% url 'requestAppointment' %})" class="btn btn-flat">solicitar</button></p>
                     {% endfor %}
                 </div>
             </li>
         {% endfor %}
     </ul>
 </div>
-<script>
-    $(document).ready(function(){
-        $('.collapsible').collapsible();
-    });
-    function getAppointment(appointment_id){
-        $.ajax({
-            type: "POST",
-            url: "{% url 'requestAppointment' %}",   
-            data: {
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-                id:appointment_id
-            },
-            success: function(result){
-                window.location.href = "{% url 'appointments' %}"; 
-            },
-            error: function (request, status, error) {
-                console.log(request.responseText);
-            }
-        });  
-    }
-</script>

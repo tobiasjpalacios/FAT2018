@@ -23,7 +23,7 @@ Perfil jubilado
                                 <p>
                                     doctor: {{ appointment.workday.doctor }}
                                 </p>
-                                <button class="btn btn-flat" id="btn-{{ appointment_id }}" onclick="deleteAppointment({{ appointment.id }})">Cancelar</button>
+                                <button class="btn btn-flat" id="btn-{{ appointment_id }}" onclick="deleteAppointment({{ appointment.id }}, {% url 'deleteAppointment' %})">Cancelar</button>
                             </div>
                         </li>
                     {% endfor %}
@@ -69,25 +69,4 @@ Perfil jubilado
 
       </div>
 </div>
-<script>
-$(document).ready(function(){
-    $('.collapsible').collapsible();
-});
-function deleteAppointment(appointment_id){
-    $.ajax({
-        type: "POST",
-        url: "{% url 'deleteAppointment' %}",   
-        data: {
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            appointment_id:appointment_id
-        },
-        success: function(result){
-            window.location.href = "{% url 'profile' %}"; 
-        },
-        error: function (request, status, error) {
-            alert(request.responseText);
-        }
-    })
-}
-</script>
 {% endblock body %}

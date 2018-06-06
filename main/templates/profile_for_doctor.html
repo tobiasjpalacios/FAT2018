@@ -13,7 +13,7 @@ Perfil doctor
                 Area: {{ doctor.speciality }}
             </p>
             <center>
-                <button class="btn btn-flat" onclick="loadWorkDayHtml()">Agregar dia de trabajo</button>
+                <button class="btn btn-flat" onclick="loadWorkDayHtml({% url 'loadWorkDayForm' %})">Agregar dia de trabajo</button>
             </center>
         </div>
         {% if form %}
@@ -55,45 +55,11 @@ Perfil doctor
                                 no hay turnos para este dia todavia
                             </div>
                         {% endif %}
-                        <center><button class="btn btn-flat" onclick="removeWorkDay({{ workday.id }})">Eliminar dia de trabajo</button></center>    
+                        <center><button class="btn btn-flat" onclick="removeWorkDay({{ workday.id }}, {% url 'deleteWorkDay' %})">Eliminar dia de trabajo</button></center>    
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
-<script>
-$(document).ready(function(){
-    $('.collapsible').collapsible();
-});
-function loadWorkDayHtml(){
-    $.ajax({
-        type: "GET",
-        url: "{% url 'loadWorkDayForm' %}",   
-        success: function(result){
-            $("#card").html(result)        
-            $("#card").css("display", "block")
-        },
-        error: function (request, status, error) {
-            alert(request.responseText);
-        }
-    });  
-}
-function removeWorkDay(workday_id){
-    $.ajax({
-        type: "POST",
-        url: "{% url 'deleteWorkDay' %}",
-        data: {
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            workday_id: workday_id
-        },
-        success: function(result){
-            window.location.href = "{% url 'profile' %}"; 
-        },
-        error: function (request, status, error){
-                alert(request.responseText)
-        }
-    })
-}
-</script>
 {% endblock body %}  

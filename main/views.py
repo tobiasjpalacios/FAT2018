@@ -117,7 +117,11 @@ def requestAppointment(request):
     if appointment.retired == None:
         appointment.retired = Retired.objects.get(user=request.user)
         appointment.save()
-        return HttpResponse("OK")
+        results = {}
+        results['doctors'] = Doctor.objects.all()
+        results["message"] = True
+        results["message_text"] = "se ha solicitado un turno para el {}".format(appointment.workday.day)
+        return render(request, 'appointment.html', results)
     return HttpResponse("Error")
 
 @require_POST

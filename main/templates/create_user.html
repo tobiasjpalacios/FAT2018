@@ -13,43 +13,43 @@ Registro
                 {% csrf_token %}
                 <div class="row">
                         <div class="col s7 input-field">
-{{ form.first_name }}
-<label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                            {{ form.first_name }}
+                            <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
                         </div>
                         <div class="col s5 input-field">
-{{ form.last_name }}
-<label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                            {{ form.last_name }}
+                            <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
                         </div>
                 </div>
                 <div class="row">
                     <div class="col s4 input-field">
-{{ form.username }}
-<label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                </div>
+                        {{ form.username }}
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    </div>
                     <div class="col s8 input-field">
-{{ form.email }}
-<label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s3 input-field">
-{{ form.password }}
-<label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                        {{ form.password }}
+                        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
                     </div>
                     <div class="col s6 input-field">
-{{ form.user_type }}
-<label for="{{ form.user_type.id_for_label }}">{{ form.user_type.label }}</label>
+                        {{ form.user_type }}
+                        <label for="{{ form.user_type.id_for_label }}">{{ form.user_type.label }}</label>
                     </div>
                     <div class="col s3 input-field">
-{{ form.re_password }}
-<label for="{{ form.re_password.id_for_label }}">{{ form.re_password.label }}</label>
+                        {{ form.re_password }}
+                        <label for="{{ form.re_password.id_for_label }}">{{ form.re_password.label }}</label>
                     </div>
-<div class="row">
-<div class="col s12 center pink-text">
-{{ form.password.errors }}
-{{ form.username.errors }}
-</div>
-</div>
+                    <div class="row">
+                        <div class="col s12 center pink-text">
+                            {{ form.password.errors }}
+                            {{ form.username.errors }}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <center>
@@ -60,9 +60,4 @@ Registro
         </div>
     </div>
 </div>
-<script>
-$(document).ready(function(){
-    $('select').formSelect();
-});
-</script>
 {% endblock body %}  

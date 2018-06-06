@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
+        {% load static %}
         <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -8,7 +9,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        {% load static %}
+        <script src="{% static 'js/functions.js' %}"></script>
+        <script src="{% static 'js/functions_ajax.js' %}"></script>
         {% block imports %}
         {% endblock imports %}
         <title>
@@ -72,5 +74,10 @@
             flex: 1 0 auto;
         }
         </style>
+        <script>
+            {% if message %}
+                M.toast({html: "{{ message_text }}", classes: 'rounded'});
+            {% endif %}
+        </script>
     </body>
 </html>

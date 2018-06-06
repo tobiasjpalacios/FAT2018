@@ -17,7 +17,7 @@ Turnos
                     </div>
                     {% if doctor.daysAvailable %}
                     <div class="card-action">
-                        <a class="btn btn-flat" onclick="loadAppointments({{ doctor.id }})" id="btn-{{ doctor.id }}">Ver turnos</a>
+                        <a class="btn btn-flat" onclick="loadAppointments({{ doctor.id }}, {% url 'loadAppointments' %})" id="btn-{{ doctor.id }}">Ver turnos</a>
                     </div>
                     <div class="row" style="display: none;" id="block-{{ doctor.id }}"></div>
                     {% else %}
@@ -37,23 +37,4 @@ Turnos
         {% endfor %}
     </div>
 </div>
-<script> 
-function loadAppointments(doctor_id){
-    $.ajax({
-        type: "GET",
-        url: "{% url 'loadAppointments' %}",   
-        data: {
-            doctor_id:doctor_id
-        },
-        success: function(result){
-            $("#block-" + doctor_id).html(result)        
-            $("#block-" + doctor_id).css("display", "block")
-            $("#btn-"+doctor_id).text("ACTUALIZAR")
-        },
-        error: function (request, status, error) {
-            alert(request.responseText);
-        }
-    });  
-}
-</script>
 {% endblock body %}  
