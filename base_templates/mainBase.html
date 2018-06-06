@@ -75,6 +75,7 @@
         }
         </style>
         <script>
+            init_Materialize();
             {% if message %}
                 M.toast({html: "{{ message_text }}", classes: 'rounded'});
             {% endif %}
