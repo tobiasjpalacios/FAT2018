@@ -19,10 +19,10 @@ USER_CHOICES = (
 )
 class Person(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user-tipe= models.IntegerField(choices=USER_CHOICES)
+    user_type= models.IntegerField(choices=USER_CHOICES)
 
 
-class WorkDay(models.Model):
+class Work_day(models.Model):
     doctor = models.ForeignKey(Person, on_delete=models.CASCADE)
     day = models.DateField()
     
@@ -37,21 +37,20 @@ class WorkDay(models.Model):
         return True 
 
 class Classroom(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
-    duration=models.CharField(max_length=256)
+    duration = models.CharField(max_length=256)
     
     def get_classroom_days(self):
-        results=Classroom_day.objets.filter(clasroom=self)
+        results = Classroom_day.objets.filter(clasroom=self)
         return results
 
     def get_classroom_place(self):
-        result=Classroom_place.objects.get(classroom=self)
+        result = Classroom_place.objects.get(classroom=self)
         return result
     
     def get_next_day(self):
-        classroom_days=self.get_classroom_days()
+        classroom_days = self.get_classroom_days()
         for classroom_day in classroom_days:
             if classroom_day >= datetime.datetime.today().weekday():
                 return classroom_day
@@ -61,31 +60,35 @@ class Classroom(models.Model):
 class Classroom_day(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     day = models.IntegerField(choices=DAYS_CHOICES)
+    start_hour = models.TimeField()
 
 
 class Classroom_place(models.Model):
-    salon=models.IntegerField()
-    capacity=models.IntegerField()
-    classroom=models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    room = models.IntegerField()
+    capacity = models.IntegerField()
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
 
 
 class RelationParticipe(models.Model):
-    person=models.ForeignKey(person, on_delete=models.CASCADE)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     class Meta:
         abstract = True
 
-class Enrrolment(RelationParticipe):
+class Enrolment(RelationParticipe):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    
+    class Meta:
+        abstract = True
 
 class Appointment(RelationParticipe):
-    workday = models.ForeignKey(WorkDay, on_delete=models.CASCADE)
-    timeAttendance = models.TimeField()
-    auth=models.BooleanField(default=False)
-    
+    work_day = models.ForeignKey(Work_day, on_delete=models.CASCADE)
+    time_attendance = models.TimeField()
+    authorized = models.BooleanField(default=False)
 
-class E_teacher(Enrrolment):
+class Enrolment_teacher(Enrolment):
+    pass
 
 
-
-class E_student(Enrrolment):
+class Enrolment_student(Enrolment):
+    pass
