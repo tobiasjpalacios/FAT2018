@@ -11,35 +11,56 @@ DAYS_CHOICES = (
     (4, 'Viernes')
 )
 
+USER_CHOICES = (
+    (0, 'jubilado'),
+    (1, 'doctor'),
+    (2, 'profesor'),
+    (3, 'administrador'),
+)
 class Person(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user-tipe= models.IntegerField()
-    def __str__(self):
-        return "{} {}".format(self.user.first_name, self.user.last_name, self.user-tipe)
+    user-tipe= models.IntegerField(choices=USER_CHOICES)
+
 
 class WorkDay(models.Model):
     doctor = models.ForeignKey(Person, on_delete=models.CASCADE)
     day = models.DateField()
+    
+    def get_appoiment(self, person_fill):
+        results = Appointment.objets.filter(workday=self, person__isnull=person_fill)
+        return results
 
-
-
-    def __str__(self):
-        return "{}/{}".format(self.day.day, self.day.month)
+    def appointment_available(self):
+        availables = self.getappoiment(True).count()
+        if availables == 0:
+            return False
+        return True 
 
 class Classroom(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    capacity = models.IntegerField()
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
     duration=models.CharField(max_length=256)
+    
+    def get_classroom_days(self):
+        results=Classroom_day.objets.filter(clasroom=self)
+        return results
 
+    def get_classroom_place(self):
+        result=Classroom_place.objects.get(classroom=self)
+        return result
+    
+    def get_next_day(self):
+        classroom_days=self.get_classroom_days()
+        for classroom_day in classroom_days:
+            if classroom_day >= datetime.datetime.today().weekday():
+                return classroom_day
+        return classroom_days.first()
 
-    def __str__(self):
-        return "{}".format(self.name, )
 
 class Classroom_day(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
-    day = models.IntegerField()
+    day = models.IntegerField(choices=DAYS_CHOICES)
 
 
 class Classroom_place(models.Model):
@@ -48,23 +69,23 @@ class Classroom_place(models.Model):
     classroom=models.ForeignKey(Classroom, on_delete=models.CASCADE)
 
 
+class RelationParticipe(models.Model):
+    person=models.ForeignKey(person, on_delete=models.CASCADE)
+
+    class Meta:
+        abstract = True
+
 class Enrrolment(RelationParticipe):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
-    person=models.ForeignKey(Person, on_delete=models.CASCADE)
-
-    def __str__(self):
-        classroomDay = self.nextDay()
-        if classroomDay:
-            return "{} {}".format(self.classroom.name, classroomDay.day)
-        return "{} - {}".format(self.classroom.name, "No hay fechas disponibles")
 
 class Appointment(RelationParticipe):
     workday = models.ForeignKey(WorkDay, on_delete=models.CASCADE)
     timeAttendance = models.TimeField()
+    auth=models.BooleanField(default=False)
     
-    def __str__(self):
-        return "{}".format(self.timeAttendance)
-class E_teacher(Person):
+
+class E_teacher(Enrrolment):
 
 
-class E_student(Person):
+
+class E_student(Enrrolment):
