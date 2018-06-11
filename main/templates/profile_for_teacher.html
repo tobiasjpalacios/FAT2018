@@ -32,23 +32,29 @@ Perfil doctor
             </div>
             </div>
             <div class="row">
-                    <div class=" input-field col s12"> 
-                        <label for="classdate"> fecha de la clase  </label>
-                        <input id="classdate" type="text" class="datepicker"> 
-                    </div>                            
+                <div class="input-field col s12">
+                    <select multiple>
+                      <option value="" disabled selected>seleccione los dias de clase</option>
+                      <option value="1">LUNES</option>
+                      <option value="2">MARTES</option>
+                      <option value="3">MIERCOLES</option>
+                      <option value="3">JUEVES</option>
+                      <option value="3">VIERNES</option>
+                    </select>
+                    <label>Dias de clase</label>
+                  </div>                            
                 </div>
                 <div class="row">   
-                    <div class=" col s5 offset-s4">
-                        <button class="btn-floating waves-effect waves-light btn red" >  <i class="material-icons">add</i> </button>
-                    </div>
-                </div>
-            <div class="row"></div>
-                <div class="row">
                     <div class=" input-field col s12"> 
-                        <label for="class_starthour"> hora de inicio de la clase </label> 
+                        <label for="class_starthour"> hora de inicio de la clase  dia </label> 
                         <input id="class_starthour" type="text" class="timepicker">
                     </div>
-                </div>    
+                    <div class=" input-field col s12"> 
+                        <label for="class_starthour"> hora de inicio de la clase viernes </label> 
+                        <input id="class_starthour" type="text" class="timepicker">
+                    </div>
+                </div>
+  
             <div class="row">
                     <div class="input-field col s6">
                         <label for="classplace">numero de salon </label>
