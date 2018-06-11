@@ -17,7 +17,6 @@ function getAppointment(appointment_id, url){
 }
 function loadAppointments(doctor_id, url){
     $.ajax({
-        type: "GET",
         url: url,   
         data: {
             doctor_id:doctor_id
@@ -35,7 +34,6 @@ function loadAppointments(doctor_id, url){
 }
 function loadWorkDayHtml(){
     $.ajax({
-        type: "GET",
         url: "{% url 'loadWorkDayForm' %}",   
         success: function(result){
             $("#card").html(result)        
